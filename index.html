@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Доска почёта сезона</title>
+<meta name="description" content="Сезон денежной охоты – ученики курса «Вайб-сайты», которые взяли оплаты за сайты.">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --bg-soft:#F3F6FD; --ink:#2B292E; --ink-2:#5E5B66; --line:#E3E6EE; --mute:#A9A7B0;
+  --blue:#567FE8;
+  /* металл: светлый блик → тон → тень */
+  --gold-a:#FFF3C4; --gold-b:#E9C25A; --gold-c:#B8862B; --gold-d:#7A5512;
+  --silver-a:#FFFFFF; --silver-b:#DDE2EA; --silver-c:#9EA6B4; --silver-d:#5F6672;
+  --bronze-a:#FFE0C2; --bronze-b:#D99A62; --bronze-c:#A8642F; --bronze-d:#6A3A15;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "Golos Text",system-ui,sans-serif;overflow-x:hidden}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 16px}
+@media (min-width:720px){.wrap{padding:0 32px}}
+
+
+/* шапка */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.top img{height:34px;display:block}
+.top .tag{font:500 13px/1 "JetBrains Mono",monospace;color:var(--ink-2);letter-spacing:.04em;text-transform:uppercase}
+
+/* первый экран */
+.hero{display:grid;gap:36px;padding:28px 0 56px;align-items:end}
+@media (min-width:900px){.hero{grid-template-columns:1.25fr 1fr;padding:48px 0 72px}}
+.eyebrow{font:500 13px/1.3 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-c);margin:0 0 18px}
+h1{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.92;letter-spacing:-.01em;margin:0}
+/* «почёта» – полированное золото с бегущим бликом */
+h1 span{display:block;padding-bottom:.06em;
+  background:linear-gradient(100deg,var(--gold-d) 0%,var(--gold-c) 18%,var(--gold-b) 34%,var(--gold-a) 46%,var(--gold-b) 58%,var(--gold-c) 76%,var(--gold-d) 100%);
+  background-size:220% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(122,85,18,.18));animation:gild 5s 1s ease-in-out infinite}
+@keyframes gild{0%,55%{background-position:100% 0}85%,100%{background-position:0 0}}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--ink-2);max-width:34ch;margin:22px 0 0}
+
+/* объёмная медаль-метка: картинка металла + цифра на эмали */
+.pin3d{position:relative;display:block;aspect-ratio:1;flex:none}
+.pin3d img{width:100%;height:100%;display:block}
+.pin3d b{position:absolute;left:50%;top:37.5%;transform:translate(-50%,-50%);font:400 calc(var(--w) * .15)/1 "Dela Gothic One",sans-serif}
+.pin3d.gold b{color:var(--gold-d);left:48.3%;top:38%} .pin3d.silver b{color:var(--silver-d)} .pin3d.bronze b{color:var(--bronze-d);left:47.6%;top:38.8%}
+.pin3d.gold{filter:drop-shadow(0 0 22px rgba(233,194,90,.55))}
+.pin3d.silver{filter:drop-shadow(0 0 18px rgba(158,166,180,.45))}
+.pin3d.bronze{filter:drop-shadow(0 0 18px rgba(217,154,98,.45))}
+
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;align-items:end}
+.step{text-align:center}
+.step .pin3d{--w:clamp(96px,14vw,150px);width:var(--w);margin:0 auto -6px}
+.step:nth-child(2) .pin3d{--w:clamp(110px,16vw,172px)}
+.step:nth-child(3) .pin3d{--w:clamp(124px,18vw,196px)}
+.step b.t{display:block;font-weight:700;font-size:15px;line-height:1.2}
+.step small{display:block;font:500 12px/1.4 "JetBrains Mono",monospace;color:var(--ink-2);margin-top:4px}
+@keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.step{animation:rise .8s cubic-bezier(.2,.9,.3,1.2) both}
+.step:nth-child(2){animation-delay:.12s}.step:nth-child(3){animation-delay:.24s}
+
+/* полоса цифр */
+.stats{display:flex;flex-wrap:wrap;gap:10px 28px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:500 14px/1.4 "JetBrains Mono",monospace;color:var(--ink-2)}
+.stats strong{color:var(--ink);font-weight:700}
+
+/* фото 9:16 */
+.photo{position:relative;aspect-ratio:9/16;overflow:hidden;border-radius:16px;background:#E9EDF4}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(20,20,26,.78))}
+.photo .cap{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:16px 14px;color:#fff}
+.photo .cap .name{font-weight:700;font-size:17px;line-height:1.2;margin:0}
+.photo .cap .place{font-size:13px;opacity:.82;margin:3px 0 0}
+
+/* металлическая рамка карточки: блик проходит при наведении и при появлении */
+.metal{position:relative;padding:4px;border-radius:20px;background:linear-gradient(135deg,var(--m-a),var(--m-b) 22%,var(--m-c) 45%,var(--m-a) 55%,var(--m-c) 72%,var(--m-d));
+  box-shadow:0 18px 36px -22px rgba(43,41,46,.55),0 0 0 1px rgba(0,0,0,.04)}
+.metal::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 48%,transparent 60%);background-size:250% 100%;background-position:120% 0;transition:background-position 1.1s ease}
+.metal:hover::before,.metal.shine::before{background-position:-40% 0}
+.gold{--m-a:var(--gold-a);--m-b:var(--gold-b);--m-c:var(--gold-c);--m-d:var(--gold-d)}
+.silver{--m-a:var(--silver-a);--m-b:var(--silver-b);--m-c:var(--silver-c);--m-d:var(--silver-d)}
+.bronze{--m-a:var(--bronze-a);--m-b:var(--bronze-b);--m-c:var(--bronze-c);--m-d:var(--bronze-d)}
+
+/* лидер */
+.leader{margin:56px 0 0;display:grid;gap:28px;align-items:center;background:var(--bg-soft);border-radius:28px;padding:28px 22px;position:relative;overflow:hidden}
+@media (min-width:760px){.leader{grid-template-columns:240px 1fr;padding:40px 48px;gap:48px}}
+.leader .metal{max-width:240px;width:100%;margin:0 auto}
+.leader h2{margin:0 0 8px;font:500 13px/1.3 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-c)}
+.leader .who{font-family:"Dela Gothic One",sans-serif;font-size:clamp(30px,4.6vw,50px);line-height:1.02;margin:0}
+.leader .meta{color:var(--ink-2);margin:12px 0 0}
+.leader .pin3d{--w:96px;width:var(--w);position:absolute;right:20px;top:14px;z-index:3}
+
+/* ступени */
+.tier{margin:80px 0 0}
+.tier-head{display:inline-flex;align-items:center;gap:14px;margin:0 0 24px;padding:10px 26px 12px 14px;border-radius:20px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 12px 30px -18px rgba(43,41,46,.35),0 0 0 1px var(--line)}
+.tier-head .pin3d{--w:72px;width:var(--w);margin:-6px -6px -10px -6px}
+.tier-head h2{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:clamp(28px,3.8vw,40px);line-height:1.05;margin:0}
+.tier-head h2.gold-t,.tier-head h2.silver-t,.tier-head h2.bronze-t{-webkit-background-clip:text;background-clip:text;color:transparent}
+.gold-t{background-image:linear-gradient(180deg,var(--gold-b),var(--gold-c) 55%,var(--gold-d))}
+.silver-t{background-image:linear-gradient(180deg,var(--silver-c),var(--silver-d) 60%,#3F444D)}
+.bronze-t{background-image:linear-gradient(180deg,var(--bronze-b),var(--bronze-c) 55%,var(--bronze-d))}
+.tier-head p{margin:2px 0 0;color:var(--ink);font-size:15px;font-weight:500}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(var(--cols),minmax(0,1fr))}
+#tier-gold .grid{--cols:3;--cw:250px} #tier-silver .grid{--cols:4;--cw:215px} #tier-bronze .grid{--cols:6;--cw:170px}
+@media (max-width:1000px){#tier-bronze .grid{--cols:3}}
+@media (max-width:760px){#tier-silver .grid{--cols:2}}
+@media (max-width:560px){#tier-gold .grid{--cols:2}#tier-bronze .grid{--cols:2}}
+.card{position:relative}
+.card .pin3d{--w:76px;width:var(--w);position:absolute;top:-14px;right:-14px;z-index:3}
+#tier-bronze .photo .cap{padding:12px 11px}#tier-bronze .photo .cap .name{font-size:15px}#tier-bronze .photo .cap .place{font-size:12px}
+#tier-bronze .card .pin3d{--w:64px}
+.card .sites{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.card .sites a{font:500 11px/1 "JetBrains Mono",monospace;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:6px 9px}
+.card.empty .photo img{filter:saturate(.85)}
+.card.empty .name{opacity:.9}
+
+/* финал */
+.join{margin:96px 0 0;padding:40px 0;border-top:1px solid var(--line);display:grid;gap:18px}
+@media (min-width:760px){.join{grid-template-columns:1fr 1fr;align-items:center}}
+.join h2{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:clamp(28px,4vw,44px);line-height:1.02;margin:0}
+.join p{margin:0;color:var(--ink-2)}
+footer{padding:28px 0 40px;color:var(--ink-2);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+/* ---- кубки по бокам: отдельный слой во весь рост экрана; половина в свободном поле, половина за карточками ---- */
+.decor{position:fixed;inset:0;z-index:0;pointer-events:none}
+.decor i{--h:min(92vh,1000px);--cw:calc(var(--h) * .5625);position:absolute;top:50%;height:var(--h);width:var(--cw);
+  background:url(img/tall-3.webp) center/contain no-repeat;filter:saturate(.7) contrast(.9) brightness(1.04);opacity:0;transform:translateY(calc(-50% + 14vh));transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.decor .l{left:calc(max(50% - 558px, 32px) - var(--cw) / 2)}
+.decor .r{right:calc(max(50% - 558px, 32px) - var(--cw) / 2)}
+.decor.on i{opacity:.55}
+@media (max-width:760px){.decor{display:none}}
+@media (prefers-reduced-motion:reduce){h1 span,.step{animation:none}.decor i{transition:opacity .4s}}
+</style>
+</head>
+<body>
+<div class="decor" aria-hidden="true"><i class="l"></i><i class="r"></i></div>
+<div class="wrap">
+  <header class="top">
+    <a href="https://academymarketing.ru" aria-label="Академия Интернет Маркетинга"><img src="logo.svg" alt="Академия Интернет Маркетинга"></a>
+    <span class="tag">Курс «Вайб-сайты»</span>
+  </header>
+
+  <section class="hero" id="hero">
+    <div>
+      <p class="eyebrow">Сезон денежной охоты</p>
+      <h1>Доска<span>почёта</span></h1>
+      <p class="lead">Ученики, которые взяли оплаты за сайты. Одна оплата – один трофей.</p>
+    </div>
+    <div class="ladder" aria-label="Ступени сезона">
+      <div class="step"><span data-pin="bronze" data-n="1"></span><b class="t">Первый трофей</b><small>1 оплата</small></div>
+      <div class="step"><span data-pin="silver" data-n="3"></span><b class="t">Охотник сезона</b><small>3 оплаты</small></div>
+      <div class="step"><span data-pin="gold" data-n="5"></span><b class="t">Легенда сезона</b><small>5 оплат</small></div>
+    </div>
+  </section>
+
+  <div class="stats" id="stats"></div>
+  <section class="leader" id="leader" aria-label="Лидер сезона"></section>
+  <section class="tier" id="tier-gold"></section>
+  <section class="tier" id="tier-silver"></section>
+  <section class="tier" id="tier-bronze"></section>
+
+  <section class="join">
+    <h2>Свободное место – ваше</h2>
+    <p>Охотник, сайт по номеру, ролик, серия касаний. Первая оплата – и вы на доске с медалью «Первый трофей». Трофеи засчитывают кураторы по отчёту в челлендже.</p>
+  </section>
+
+  <footer>
+    <span>Евгений Андрианов, <a href="https://academymarketing.ru">Академия Интернет Маркетинга</a></span>
+    <span id="updated"></span>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(() => {
+  const TIERS = [
+    { key: 'gold',   min: 5, title: 'Легенды сезона', sub: '5 оплат и больше', slots: 3 },
+    { key: 'silver', min: 3, title: 'Охотники сезона', sub: '3–4 оплаты', slots: 4 },
+    { key: 'bronze', min: 1, title: 'Первый трофей', sub: '1–2 оплаты', slots: 6 }
+  ];
+  const HOODS = ['img/hood-1.webp', 'img/hood-2.webp'];
+  const pin = (metal, n) => `<span class="pin3d ${metal}"><img src="img/pin-${metal}.webp" alt=""><b>${n}</b></span>`;
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+  const word = (n) => { const m = n % 10, h = n % 100; return m === 1 && h !== 11 ? 'трофей' : m >= 2 && m <= 4 && (h < 12 || h > 14) ? 'трофея' : 'трофеев'; };
+  const tierOf = (n) => TIERS.find((t) => n >= t.min);
+  const place = (p) => esc([p.city, p.niche].filter(Boolean).join(' · '));
+  let k = 0;
+  const photo = (p, cap) => `<div class="photo"><img src="${p && p.photo ? esc(p.photo) : HOODS[k++ % 2]}" alt="" loading="lazy">${cap ? `<div class="cap">${cap}</div>` : ''}</div>`;
+
+  document.querySelectorAll('[data-pin]').forEach((el) => { el.outerHTML = pin(el.dataset.pin, el.dataset.n); });
+
+  const data = window.SEASON || { people: [] };
+  const people = (data.people || []).filter((p) => p && p.name && +p.trophies >= 1)
+    .map((p) => ({ ...p, trophies: +p.trophies }))
+    .sort((x, y) => y.trophies - x.trophies || String(x.date || '').localeCompare(String(y.date || '')));
+  const total = people.reduce((s, p) => s + p.trophies, 0);
+  document.getElementById('stats').innerHTML = people.length
+    ? `<span>Охотников на доске: <strong>${people.length}</strong></span><span>Трофеев за сезон: <strong>${total}</strong></span><span>Легенд: <strong>${people.filter((p) => p.trophies >= 5).length}</strong></span>`
+    : `<span><strong>Сезон открыт.</strong> Доска ждёт первых охотников – все места пока свободны.</span>`;
+
+  const lead = people[0];
+  document.getElementById('leader').innerHTML = `${pin('gold', lead ? lead.trophies : 1)}
+    <div class="metal gold">${photo(lead)}</div>
+    <div><h2>Лидер сезона</h2>
+    <p class="who">${lead ? esc(lead.name) : 'Здесь будет ваше имя'}</p>
+    <p class="meta">${lead ? `${place(lead)} – ${lead.trophies} ${word(lead.trophies)}` : 'Больше всех оплат за сезон – и вы в центре доски.'}</p></div>`;
+
+  const card = (p, t) => {
+    const cap = p
+      ? `<p class="name">${esc(p.name)}</p><p class="place">${place(p)}</p>${(p.sites || []).length ? `<div class="sites">${p.sites.map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener">сайт ${i + 1}</a>`).join('')}</div>` : ''}`
+      : `<p class="name">Место свободно</p><p class="place">${t.min === 1 ? '1 оплата' : t.min === 3 ? '3 оплаты' : '5 оплат'} – и вы здесь</p>`;
+    return `<article class="card${p ? '' : ' empty'}">${pin(t.key, p ? p.trophies : t.min)}<div class="metal ${t.key}">${photo(p, cap)}</div></article>`;
+  };
+  for (const t of TIERS) {
+    const mine = people.filter((p) => tierOf(p.trophies) === t);
+    const empty = Math.max(t.slots - mine.length, mine.length ? 1 : 0);
+    document.getElementById('tier-' + t.key).innerHTML =
+      `<div class="tier-head">${pin(t.key, t.min)}<div><h2 class="${t.key}-t">${t.title}</h2><p>${t.sub}</p></div></div>
+       <div class="grid">${mine.map((p) => card(p, t)).join('')}${Array.from({ length: empty }, () => card(null, t)).join('')}</div>`;
+  }
+  if (data.updated) document.getElementById('updated').textContent = 'Обновлено ' + data.updated;
+
+  // блик пробегает по рамкам, когда карточки появляются на экране
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('shine'); io.unobserve(e.target); } }), { threshold: .5 });
+  document.querySelectorAll('.metal').forEach((m) => io.observe(m));
+
+  // кубки: появляются, когда до них долистали, и медленно плывут при прокрутке
+  const decor = document.querySelector('.decor'), cups = decor.querySelectorAll('i'), mark = document.getElementById('tier-gold');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tick = () => {
+    const top = mark.getBoundingClientRect().top, on = top < innerHeight * .8;
+    decor.classList.toggle('on', on);
+    const shift = !on ? 14 : still ? 0 : Math.max(-6, Math.min(6, top / innerHeight * 6));
+    cups[0].style.transform = `translateY(calc(-50% + ${shift}vh))`;
+    cups[1].style.transform = `translateY(calc(-50% + ${shift * 1.4}vh)) scaleX(-1)`;
+  };
+  addEventListener('scroll', () => requestAnimationFrame(tick), { passive: true }); addEventListener('resize', tick);
+  tick();
+})();
+</script>
+</body>
+</html>

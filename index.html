@@ -209,7 +209,7 @@ footer{padding:28px 0 40px;color:var(--ink-2);font-size:14px;display:flex;flex-w
     <div class="metal gold">${photo(lead)}</div>
     <div><h2>Лидер сезона</h2>
     <p class="who">${lead ? esc(lead.name) : 'Здесь будет ваше имя'}</p>
-    <p class="meta">${lead ? `${place(lead)} – ${lead.trophies} ${word(lead.trophies)}` : 'Больше всех оплат за сезон – и вы в центре доски.'}</p></div>`;
+    <p class="meta">${lead ? [place(lead), `${lead.trophies} ${word(lead.trophies)}`].filter(Boolean).join(' – ') : 'Больше всех оплат за сезон – и вы в центре доски.'}</p></div>`;
 
   const card = (p, t) => {
     const cap = p

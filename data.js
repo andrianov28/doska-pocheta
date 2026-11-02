@@ -2,10 +2,11 @@
 // Один человек: { name, city, niche, trophies, sites: ["https://..."], photo: "img/people/....webp", date: "2026-10-20" }
 // trophies – число оплат: 1+ «Первый трофей», 3+ «Охотник сезона», 5+ «Легенда сезона».
 // 02.11.2026 – список от Андрея Чернова (имя, фото, кейсы), 12 кейсов на 7 учеников.
+// 02.11.2026 – Андрей Ковалев отчитался о 4-й оплате (3 → 4).
 window.SEASON = {
   updated: "2 ноября 2026",
   people: [
-    { name: "Андрей Ковалев",        trophies: 3, photo: "img/people/andrey-kovalev.webp" },
+    { name: "Андрей Ковалев",        trophies: 4, photo: "img/people/andrey-kovalev.webp" },
     { name: "Мария Зачиняева",       trophies: 3, photo: "img/people/mariya-zachinyaeva.webp" },
     { name: "Марина Левая",          trophies: 2, photo: "img/people/marina-levaya.webp" },
     { name: "Антонина Логутенкова",  trophies: 1, photo: "img/people/antonina-logutenkova.webp" },
